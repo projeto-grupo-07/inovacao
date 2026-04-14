@@ -4,20 +4,19 @@ import com.brinks.grupo7.ms_email_service_async.core.application.port.output.Mes
 import com.brinks.grupo7.ms_email_service_async.core.domain.model.vo.Email;
 import com.brinks.grupo7.ms_email_service_async.infrastructure.config.RabbitMqConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
-import tools.jackson.databind.ObjectMapper;
 
+@Slf4j
 @Component
+@RequiredArgsConstructor
 public class RabbitMqAdapter implements MessagePublisher {
 
     private final RabbitTemplate rabbitTemplate;
     private final ObjectMapper objectMapper;
-
-    public RabbitMqAdapter(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper) {
-        this.rabbitTemplate = rabbitTemplate;
-        this.objectMapper = objectMapper;
-    }
 
     @Override
     public void publishEmailTask(Email email) {
@@ -26,8 +25,11 @@ public class RabbitMqAdapter implements MessagePublisher {
 
             rabbitTemplate.convertAndSend(RabbitMqConfig.EMAIL_QUEUE, json);
 
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Erro ao serializar e-mail para JSON", e);
+            log.info("Mensagem publicada na fila para o destinatário: {}", email.destinatario());
+
+        } catch (JsonProcessingException e) {
+            log.error("Erro de serialização do e-mail: {}", e.getMessage());
+            throw new RuntimeException("Falha ao processar e-mail para a fila", e);
         }
     }
 }

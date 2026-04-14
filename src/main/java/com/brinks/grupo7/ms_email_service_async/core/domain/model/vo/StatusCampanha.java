@@ -5,6 +5,5 @@ public enum StatusCampanha {
     PROCESSANDO,
     ENVIANDO,
     CONCLUIDA,
-    FALHADA,
-    CANCELADA
+    FALHADA
 }

@@ -3,11 +3,12 @@ package com.brinks.grupo7.ms_email_service_async.infrastructure.adapter.messagin
 import com.brinks.grupo7.ms_email_service_async.core.application.port.output.EmailSender;
 import com.brinks.grupo7.ms_email_service_async.core.domain.model.vo.Email;
 import com.brinks.grupo7.ms_email_service_async.infrastructure.config.RabbitMqConfig;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
-import tools.jackson.databind.ObjectMapper;
+
 
 @Slf4j
 @Component

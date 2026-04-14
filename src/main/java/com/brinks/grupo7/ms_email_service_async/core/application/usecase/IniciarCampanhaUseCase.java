@@ -6,10 +6,12 @@ import com.brinks.grupo7.ms_email_service_async.core.domain.model.Campanha;
 import com.brinks.grupo7.ms_email_service_async.core.domain.model.vo.Email;
 import com.brinks.grupo7.ms_email_service_async.core.domain.repository.CampanhaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 
+@Component
 @RequiredArgsConstructor
 public class IniciarCampanhaUseCase {
 
