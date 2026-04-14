@@ -12,13 +12,13 @@ public class Campanha {
     private StatusCampanha status;
     private String urlImagem;
 
-    public Campanha(UUID id, String nomeCampanha, String assunto, String corpoTemplate, StatusCampanha status, String imagemUrl) {
+    public Campanha(UUID id, String nomeCampanha, String assunto, String corpoTemplate, StatusCampanha status, String urlImagem) {
         this.id = id;
         this.nomeCampanha = nomeCampanha;
         this.assunto = assunto;
         this.corpoTemplate = corpoTemplate;
         this.status = status;
-        this.urlImagem = imagemUrl;
+        this.urlImagem = urlImagem;
     }
 
     public Campanha() {
@@ -48,10 +48,24 @@ public class Campanha {
         return urlImagem;
     }
 
-    public void iniciar(){
-        if(this.status != StatusCampanha.PENDENTE){
-            throw new RuntimeException("Campanha não pode ser enviado no status atual: " + this.status);
+    public void iniciar() {
+        if (this.status != StatusCampanha.PENDENTE) {
+            throw new RuntimeException("A campanha só pode ser iniciada se estiver PENDENTE.");
         }
-        this.status = StatusCampanha.ENVIANDO;
+        this.status = StatusCampanha.PROCESSANDO;
+    }
+
+    public void marcarComoEnviando() {
+        if (this.status == StatusCampanha.PROCESSANDO) {
+            this.status = StatusCampanha.ENVIANDO;
+        }
+    }
+
+    public void concluir() {
+        this.status = StatusCampanha.CONCLUIDA;
+    }
+
+    public void falhar() {
+        this.status = StatusCampanha.FALHADA;
     }
 }
