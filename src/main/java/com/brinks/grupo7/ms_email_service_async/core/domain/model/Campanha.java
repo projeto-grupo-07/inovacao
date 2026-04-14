@@ -24,6 +24,30 @@ public class Campanha {
     public Campanha() {
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public String getNomeCampanha() {
+        return nomeCampanha;
+    }
+
+    public String getAssunto() {
+        return assunto;
+    }
+
+    public String getCorpoTemplate() {
+        return corpoTemplate;
+    }
+
+    public StatusCampanha getStatus() {
+        return status;
+    }
+
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
     public void iniciar(){
         if(this.status != StatusCampanha.PENDENTE){
             throw new RuntimeException("Campanha não pode ser enviado no status atual: " + this.status);
