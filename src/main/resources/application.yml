@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: ms-email-service-async
+  profiles:
+    active: dev
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:admin}
+    password: ${RABBITMQ_PASS:admin}
+    template:
+      mandatory: true
+
+server:
+  port: 8082
+  error:
+    include-message: always
+    include-binding-errors: always
+
+broker:
+  exchange:
+    name: brinks_exchange
+  queue:
+    name: email_queue
+  routingKey:
+    name: email.send
