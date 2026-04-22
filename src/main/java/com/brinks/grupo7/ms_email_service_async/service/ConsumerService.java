@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConsumerService {
 
-    @RabbitListener(queues = "${broker.queue.name}")
+    @RabbitListener(queues = "email_queue")
     public void receive(MessageDto dto) {
         System.out.println("Received message: " + dto.message());
     }
