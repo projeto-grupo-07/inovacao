@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class RabbitMQConfig {
+public class RabbitMQConfig { //COLOCAR TEMPLATE
 
     public static final String QUEUE = "email_queue";
     public static final String EXCHANGE = "brinks_exchange";

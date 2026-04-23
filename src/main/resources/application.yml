@@ -10,17 +10,21 @@ spring:
     password: ${RABBITMQ_PASS:admin}
     template:
       mandatory: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: brinkscalcados@gmail.com
+    password: elnt avwh gchi ytrc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 server:
   port: 8082
   error:
     include-message: always
     include-binding-errors: always
-
-broker:
-  exchange:
-    name: brinks_exchange
-  queue:
-    name: email_queue
-  routingKey:
-    name: email.send
